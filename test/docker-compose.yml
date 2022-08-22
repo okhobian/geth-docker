@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:5000"
+    networks:
+      - web-net
+
+  tester:
+    image: "redis:alpine"
+    networks:
+      - web-net
+
+networks:
+  web-net:
+    driver: bridge
+    name: web-net
+    ipam:
+      config:
+      - subnet: 172.16.254.0/24
